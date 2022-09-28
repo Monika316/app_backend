@@ -1,6 +1,5 @@
 package com.example.demo.appuser;
 
-import com.sun.xml.bind.v2.TODO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,39 +20,37 @@ import java.util.Collections;
 public class AppUser implements UserDetails {
 
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "user_sequence"
     )
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
-    public AppUser(String name,
+    public AppUser(String firstName,
+                   String lastName,
                    String email,
-                   String username,
                    String password,
-                   AppUserRole appUserRole,
-                   Boolean locked,
-                   Boolean enabled) {
-        this.name = name;
+                   AppUserRole appUserRole
+                   ) {
+        this.firstName = firstName;
         this.email = email;
-        this.username = username;
+        this.lastName = lastName;
         this.password = password;
         this.appUserRole = appUserRole;
-        this.locked = locked;
-        this.enabled = enabled;
+
     }
 
     @Override
@@ -70,8 +67,17 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
 
     //TODO:
     @Override
