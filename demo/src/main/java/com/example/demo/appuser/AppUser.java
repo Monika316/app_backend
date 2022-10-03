@@ -31,7 +31,8 @@ public class AppUser implements UserDetails {
     )
     private Long id;
     private String firstName;
-    private String lastName;
+    //private String lastName;
+
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -40,14 +41,13 @@ public class AppUser implements UserDetails {
     private Boolean enabled = false;
 
     public AppUser(String firstName,
-                   String lastName,
                    String email,
                    String password,
                    AppUserRole appUserRole
                    ) {
         this.firstName = firstName;
         this.email = email;
-        this.lastName = lastName;
+       // this.lastName = lastName;
         this.password = password;
         this.appUserRole = appUserRole;
 
@@ -70,9 +70,9 @@ public class AppUser implements UserDetails {
         return email;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
+    //public String getLastName() {
+      //  return lastName;
+    //}
 
     public String getFirstName() {
         return firstName;

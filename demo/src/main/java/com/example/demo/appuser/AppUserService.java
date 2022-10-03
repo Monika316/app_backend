@@ -34,7 +34,7 @@ public class AppUserService implements UserDetailsService {
        if (userExists) {
            throw new IllegalStateException("email already taken");
        }
-//TODO: if user exists and is not confirmed
+
        String encodedPassword = bCryptPasswordEncoder.encode((appUser.getPassword()));
 
        appUser.setPassword(encodedPassword);
@@ -49,7 +49,7 @@ public class AppUserService implements UserDetailsService {
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-        //TODO: send email
+
        return token;
     }
 
