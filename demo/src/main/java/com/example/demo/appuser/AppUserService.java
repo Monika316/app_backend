@@ -1,25 +1,28 @@
 package com.example.demo.appuser;
 
 import com.example.demo.registration.token.ConfirmationToken;
-import com.example.demo.registration.token.ConfirmationTokenRepository;
 import com.example.demo.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
-import org.springframework.security.core.userdetails.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
+@Slf4j
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
-    private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
     private final AppUserRepository appUserRepository;
+    private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
     @Override
@@ -53,8 +56,13 @@ public class AppUserService implements UserDetailsService {
        return token;
     }
 
+    public Optional<AppUser> getUser(String email) {
+        return appUserRepository.findByEmail(email);
+    }
+
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
     }
+
 
 }

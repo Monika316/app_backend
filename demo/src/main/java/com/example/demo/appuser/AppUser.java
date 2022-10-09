@@ -9,8 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Getter
 @Setter
@@ -30,7 +33,7 @@ public class AppUser implements UserDetails {
             generator = "user_sequence"
     )
     private Long id;
-    private String firstName;
+    private String userName;
     //private String lastName;
 
     private String email;
@@ -40,12 +43,13 @@ public class AppUser implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    public AppUser(String firstName,
+
+    public AppUser(String userName,
                    String email,
                    String password,
                    AppUserRole appUserRole
                    ) {
-        this.firstName = firstName;
+        this.userName = userName;
         this.email = email;
        // this.lastName = lastName;
         this.password = password;
@@ -74,8 +78,8 @@ public class AppUser implements UserDetails {
       //  return lastName;
     //}
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
 

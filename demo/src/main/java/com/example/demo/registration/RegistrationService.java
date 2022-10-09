@@ -25,25 +25,17 @@ public class RegistrationService {
             throw new IllegalStateException("email not valid");
         }
 
-        //String token =appUserService.signUpUser(new AppUser(
-                //request.getFirstName(),
-               // request.getLastName(),
-              //  request.getEmail(),
-            //    request.getPassword(),
-          //      AppUserRole.USER
-        //));
-
         String token =appUserService.signUpUser(new AppUser(
-                request.getFirstName(),
+                request.getUserName(),
                 request.getEmail(),
                 request.getPassword(),
                 AppUserRole.USER
         ));
 
-        String link = "http://localhost:8080/api/v1/app/confirm?token="+ token;
+        String link = "http://localhost:8080/register/confirm?token="+ token;
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(), link));
+                buildEmail(request.getUserName(), link));
         return token;
     }
 
