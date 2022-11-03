@@ -74,16 +74,12 @@ public class AppUser implements UserDetails {
         return email;
     }
 
-    //public String getLastName() {
-      //  return lastName;
-    //}
 
     public String getUserName() {
         return userName;
     }
 
 
-    //TODO:
     @Override
     public boolean isAccountNonExpired() {
         return true;
