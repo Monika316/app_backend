@@ -1,6 +1,5 @@
 package com.example.demo.quiz.test;
 
-import com.example.demo.quiz.options.Options;
 import com.example.demo.quiz.test.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
