@@ -8,7 +8,7 @@ spring:
   main:
     allow-circular-references: true
   datasource:
-    password: app123
+    password:
     url: jdbc:postgresql://localhost:5432/app
     username: postgres
     hikari:
